@@ -21,7 +21,6 @@ return new class extends Migration
             $table->integer('telepon')->unique();
             $table->string('rule')->nullable();
             $table->timestamp('inserted_at')->nullable();
-            $table->timestamp('updated_at')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
