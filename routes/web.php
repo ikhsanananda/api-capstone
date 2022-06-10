@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HospitalController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+Route::get('/main', [HospitalController::class, 'index']);
+Route::post('/main', [HospitalController::class, 'update']);
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::get('/login', [LoginController::class, 'index']);

@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('telepon')->unique();
             $table->string('rule')->nullable();
+            $table->integer('hospital_id');
             $table->timestamp('deleted_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

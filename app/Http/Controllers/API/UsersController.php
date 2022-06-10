@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Akun;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Str;
+use DB;
+use Carbon\Carbon;
 
 class UsersController extends Controller
 {
@@ -52,17 +55,20 @@ class UsersController extends Controller
                 'name' => 'required',
                 'email' => 'required',
                 'password' => 'required',
-                'telepon' => 'required',
-                'rule' => 'required'
+                'telepon' => 'required'
             ]);
-            $user = Akun::create([
-                'name' => $request -> name,
+            $time = Carbon::now()->toDateTimeString();
+            $user = ['name' => $request -> name,
                 'email' => $request -> email,
                 'password' => $request -> password,
                 'telepon' => $request -> telepon,
-                'rule' => $request -> rule,
-            ]);
-            $data = Akun::where('id','=',$user->id)->get();
+                'rule' => 'user',
+                'hospital_id' => '0',
+                'created_at' => $time,
+                'updated_at' => $time
+            ];
+            DB::insert('insert into users (name, email, password, telepon, rule, hospital_id, created_at, updated_at) values (?, ?, ?, ?, ?, ?, ?, ?)', [$user['name'], $user['email'], $user['password'], $user['telepon'], 'user', 0, $user['created_at'], $user['updated_at']]);
+            $data = Akun::where('email','=',$user['email'])->get();
             if($data)
             {
                 return ApiFormatter::createApi(200, 'Success', $data);
@@ -86,7 +92,11 @@ class UsersController extends Controller
      */
     public function show($email)
     {
-        $data = Akun::where('email','=',$email)->get();
+        $data = Akun::where('email','=',$email)->get()->toArray();
+        $token = Str::random(32);
+        $data[0]['remember_token'] =  $token;
+        $time = Carbon::now()->toDateTimeString();
+        DB::update('update users set remember_token = ?, updated_at = ? where email = ?', [$token, $time, $email]);
         if($data)
         {
             return ApiFormatter::createApi(200, 'Success', $data);
@@ -122,19 +132,18 @@ class UsersController extends Controller
                 'name' => 'required',
                 'email' => 'required',
                 'password' => 'required',
-                'telepon' => 'required',
-                'rule' => 'required'
+                'telepon' => 'required'
             ]);
 
-            $user = Akun::findOrFail($id);
-            $user -> update([
-                'name' => $request -> name,
+            $time = Carbon::now()->toDateTimeString();
+            $user = ['name' => $request -> name,
                 'email' => $request -> email,
                 'password' => $request -> password,
                 'telepon' => $request -> telepon,
-                'rule' => $request -> rule,
-            ]);
-            $data = Akun::where('id','=',$user->id)->get();
+                'updated_at' => $time
+            ];
+            DB::update('update users set name = ?, email = ?, password = ?, telepon = ?, updated_at = ? where id = ?', [$user['name'],$user['email'],$user['password'],$user['telepon'],$user['updated_at'],$id]);
+            $data = Akun::where('id','=',$id)->get();
             if($data)
             {
                 return ApiFormatter::createApi(200, 'Success', $data);

@@ -17,7 +17,8 @@ class Akun extends Model
         'email',
         'password',
         'telepon',
-        'rule'
+        'rule',
+        'hospital_id'
     ];
 
     public $hidden = [];
