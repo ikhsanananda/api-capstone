@@ -162,3 +162,60 @@ https://c22-ps173.uc.r.appspot.com/api/
   }
   ```
   
+## Short Ambulance
+* URL 
+  * /short/ambulance
+* Method
+  * POST
+* Example
+  * https://c22-ps173.uc.r.appspot.com/api/short/ambulance
+* Response
+  ```
+  {
+    "code": 200,
+    "message": "Success",
+    "data": [
+        {
+            "id": 9,
+            "nama_ambulan": "Ambulance Mardi Rahayu",
+            "nama_driver": "Genta",
+            "lintang": -6.2023994,
+            "bujur": 106.8994353,
+            "alamat": "Jl. Jatinegara Kaum, Jakarta Timur",
+            "telepon": 81288876543,
+            "created_at": null,
+            "updated_at": null
+        }
+    ]
+  }
+  ```
+  
+## Short Hospital
+* URL 
+  * /short/hospital
+* Method
+  * POST
+* Example
+  * https://c22-ps173.uc.r.appspot.com/api/short/hospital
+* Response
+  ```
+  {
+    "code": 200,
+    "message": "Success",
+    "data": [
+        {
+            "kode": 3172770,
+            "nama": "RSIA Alvernia Agusta",
+            "jenis": "RSIA",
+            "tipe": "C",
+            "lintang": -6.19377671215609,
+            "bujur": 106.891590453748,
+            "alamat": "Jl. Pemuda No.80, Jati, Kec. Pulo Gadung, Kota Jakarta Timur, DKI Jakarta 13220",
+            "bed_avail": 1,
+            "telepon": 81280210270,
+            "created_at": null,
+            "updated_at": null
+        }
+    ]
+  }
+  ```
