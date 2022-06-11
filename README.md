@@ -167,6 +167,9 @@ https://c22-ps173.uc.r.appspot.com/api/
   * /short/ambulance
 * Method
   * POST
+* Request Body
+  * lintang as double
+  * bujur as double
 * Example
   * https://c22-ps173.uc.r.appspot.com/api/short/ambulance
 * Response
@@ -195,6 +198,9 @@ https://c22-ps173.uc.r.appspot.com/api/
   * /short/hospital
 * Method
   * POST
+* Request Body
+  * lintang as double
+  * bujur as double
 * Example
   * https://c22-ps173.uc.r.appspot.com/api/short/hospital
 * Response
